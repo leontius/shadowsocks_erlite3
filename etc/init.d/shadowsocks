@@ -21,6 +21,7 @@ ISPDNS=114.114.114.114
 
 #This source ip range will not go through shadowsocks, uncomment if you want to use it
 #BYPASS_RANGE=192.168.123.0/24
+BYPASS_RANGE=192.166.0.39
 
 #Make sure your shadowsocks config file is correct!
 SSCONFIG=/config/shadowsocks/conf/shadowsocks.json
@@ -80,37 +81,31 @@ gen_iplist() {
 		169.254.0.0/16
 		172.16.0.0/12
 		192.168.0.0/16
+		192.166.0.0/16
 		224.0.0.0/4
 		240.0.0.0/4
 		255.255.255.255
 		110.232.176.0/22
+		223.167.0.0/16
+		27.115.41.0/22
+		142.54.187.126
+		67.214.175.84
 		$ss_server_ip
 		$(cat ${CHNROUTE:=/dev/null} 2>/dev/null)
 EOF
 }
 
 rules_add() {
-	ipset -! -R <<-EOF || return 1
-		create ss_ipset_bypass hash:net
-		$(gen_iplist | sed -e "s/^/add ss_ipset_bypass /")
-EOF
-	iptables -t nat -N SHADOWSOCKS && \
-	iptables -t nat -A SHADOWSOCKS -m set --match-set ss_ipset_bypass dst -j RETURN && \
-	iptables -t nat -A SHADOWSOCKS -p tcp -j REDIRECT --to-ports 1081 && \
-	iptables -t nat -A PREROUTING -p tcp -j SHADOWSOCKS && \
-	iptables -t nat -A OUTPUT -p tcp -j SHADOWSOCKS
-	if [ "$BYPASS_RANGE" ]; then
-		iptables -t nat -I SHADOWSOCKS -s $BYPASS_RANGE -j RETURN
-	fi
+	ipset -N gfwlist iphash
+	iptables -t nat -A PREROUTING -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1080
+	iptables -t nat -A OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1080
 	return $?
 }
 
 rules_flush() {
-	iptables -t nat -F SHADOWSOCKS
-	iptables -t nat -D PREROUTING -p tcp -j SHADOWSOCKS
-	iptables -t nat -D OUTPUT -p tcp -j SHADOWSOCKS
-	iptables -t nat -X SHADOWSOCKS
-	ipset -X ss_ipset_bypass
+	iptables -t nat -D PREROUTING -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1080
+	iptables -t nat -D OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1080
+	ipset -X gfwlist
 	return $?
 }
 
