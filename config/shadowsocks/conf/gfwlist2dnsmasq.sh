@@ -1,6 +1,6 @@
 #/bin/sh
 
-# sudo bash gfwlist2dnsmasq.sh -p 5301 -s gfwlist -o dnsmasq_gfwlist_ipset.conf
+# sudo bash gfwlist2dnsmasq.sh -p 5301 -s gfwlist -o /etc/dnsmasq.d/dnsmasq_gfwlist_ipset.conf
 
 # Name:        gfwlist2dnsmasq.sh
 # Desription:  A shell script which convert gfwlist into dnsmasq rules.
