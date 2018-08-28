@@ -17,7 +17,7 @@ DAEMON_CHINADNS=/config/shadowsocks/bin/chinadns
 
 #/config/shadowsocks/bin/pdnsd -c /config/shadowsocks/conf/pdnsd.conf
 #Change ISPDNS to your ISP dns or public dns, like 1.2.4.8, 114.114.114.114
-ISPDNS=223.5.5.5
+ISPDNS=114.114.114.114
 
 #This source ip range will not go through shadowsocks, uncomment if you want to use it
 #BYPASS_RANGE=192.168.123.0/24
@@ -97,14 +97,14 @@ EOF
 
 rules_add() {
 	ipset -N gfwlist iphash
-	iptables -t nat -A PREROUTING -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1081
-	iptables -t nat -A OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1081
+	iptables -t nat -A PREROUTING -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 1081
+	iptables -t nat -A OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 1081
 	return $?
 }
 
 rules_flush() {
-	iptables -t nat -D PREROUTING -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1081
-	iptables -t nat -D OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1081
+	iptables -t nat -D PREROUTING -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 1081
+	iptables -t nat -D OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 1081
 	ipset -X gfwlist
 	return $?
 }
