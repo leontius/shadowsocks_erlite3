@@ -4,18 +4,18 @@ shadowsocks for EdgeRouter Lite3
 
 本项目修改自shadowsocks_erx, 只是把用到的工具重新编译了了一份mips。  
 
-# 缺少的依赖可以从下面安装
+# 缺少的依赖可以从下面安装，
 在 https://packages.debian.org/zh-cn/ 这个界面搜索以下包  
 安装  
-sudo dpkg -i apg_2.2.3.dfsg.1-2_mipsel.deb  
-sudo dpkg -i pwgen_2.07-1_mipsel.deb  
-sudo dpkg -i libc6_2.19-18+deb8u7_mipsel.deb  
-sudo dpkg -i libev4_4.15-3_mipsel.deb  
-sudo dpkg -i libmbedcrypto0_2.4.0-1-bpo8+1_mipsel.deb  
-sudo dpkg -i libpcre3_8.35-3.3+deb8u4_mipsel.deb  
-sudo dpkg -i libsodium18_1.0.11-1-bpo8+1_mipsel.deb  
-sudo dpkg -i libudns0_0.4-1_mipsel.deb  
-sudo dpkg -i shadowsocks-libev_3.0.5-1_mipsel.deb
+sudo dpkg -i apg_2.2.3.dfsg.1-2_mips.deb  
+sudo dpkg -i pwgen_2.07-1_mips.deb  
+sudo dpkg -i libc6_2.19-18+deb8u7_mips.deb  
+sudo dpkg -i libev4_4.15-3_mips.deb  
+sudo dpkg -i libmbedcrypto0_2.4.0-1-bpo8+1_mips.deb  
+sudo dpkg -i libpcre3_8.35-3.3+deb8u4_mips.deb  
+sudo dpkg -i libsodium18_1.0.11-1-bpo8+1_mips.deb  
+sudo dpkg -i libudns0_0.4-1_mips.deb  
+sudo dpkg -i shadowsocks-libev_3.0.5-1_mips.deb
 
 
 安装:
