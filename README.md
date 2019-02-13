@@ -4,9 +4,10 @@ shadowsocks for EdgeRouter Lite3
 
 本项目修改自shadowsocks_erx, 只是把用到的工具重新编译了了一份mips。  
 
-# 缺少的依赖可以从下面安装，
+## 缺少的依赖可以从下面安装，
 在 https://packages.debian.org/zh-cn/ 这个界面搜索以下包  
-安装  
+安装
+``` shell
 sudo dpkg -i apg_2.2.3.dfsg.1-2_mips.deb  
 sudo dpkg -i pwgen_2.07-1_mips.deb  
 sudo dpkg -i libc6_2.19-18+deb8u7_mips.deb  
@@ -16,9 +17,9 @@ sudo dpkg -i libpcre3_8.35-3.3+deb8u4_mips.deb
 sudo dpkg -i libsodium18_1.0.11-1-bpo8+1_mips.deb  
 sudo dpkg -i libudns0_0.4-1_mips.deb  
 sudo dpkg -i shadowsocks-libev_3.0.5-1_mips.deb
+```
 
-
-安装:
+安装:  
 1.下载shadowsocks_erlite3-master.zip并解压  
 2.用winscp把解压的所有文件copy到/tmp目录  
 3.连接路由CLI命令界面并登陆，然后执行:   
@@ -33,7 +34,7 @@ sudo bash install.sh
 4.1080端口可以作为socks5翻墙代理使用  
 5.文件存放在/config目录是因为这个目录备份配置的时候会被一起备份，并且系统升级也不会删除  
 6.shadowsocks-libev版本:v3.1.0, chinadns版本:v1.3.2(修改版)，pdnsd版本:v1.2.9  
-7.EdgeRouter X EdgeOS v1.8.5,v1.9.0测试通过  
+7.EdgeRouter Lite3 EdgeOS v1.8.5,v1.9.0测试通过  
 8.如果想暂停shadowsocks，运行sudo /etc/init.d/shadowsocks stop  
 9.重新启动就运行sudo /etc/init.d/shadowsocks start  
 10.运行sudo crontab -e，并在文件末尾添加以下内容，就可以实现每隔5分钟检测ss状态，如果不能翻墙就自动重启服务：  
