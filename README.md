@@ -4,6 +4,8 @@ shadowsocks for EdgeRouter Lite3
 
 本项目修改自shadowsocks_erx, 只是把用到的工具重新编译了了一份mips。  
 
+* 最近使用了Phicomm N1作为单臂路由，erlite3 fwq太麻烦。
+
 ## 缺少的依赖可以从下面安装，
 在 https://packages.debian.org/zh-cn/ 这个界面搜索以下包  
 安装
